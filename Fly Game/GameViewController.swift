@@ -14,11 +14,15 @@ class GameViewController: UIViewController {
     //MARK: - Outlets
     let buttun = UIButton()
     
+    ///MARK: Properties
+    var duration:TimeInterval = 5
+    var ship = SCNNode()
+    
     //MARK: - Methods
     
     func addShip(to scene:SCNScene )  {
         // retrieve the ship node
-        let ship = scene.rootNode.childNode(withName: "ship", recursively: true)!
+        ship = scene.rootNode.childNode(withName: "ship", recursively: true)!
         
         //Correct ship rotatoin
         ship.rotation = SCNVector4(0, 0, 0, 1)
@@ -37,8 +41,8 @@ class GameViewController: UIViewController {
         
         // animate the 3d object
         
-        ship.runAction(.move(to: SCNVector3(), duration: 5)) {
-            ship.isHidden = true
+        ship.runAction(.move(to: SCNVector3(), duration: duration)) {
+            self.ship.isHidden = true
             DispatchQueue.main.async {
                 self.buttun.isHidden = false
             }
@@ -74,6 +78,9 @@ class GameViewController: UIViewController {
     @objc func buttonTapped() {
         print(#line, #function)
         buttun.isHidden = true
+        
+        //Restore duration
+        duration = 5
         
         // retrieve the SCNView
         let scnView = self.view as! SCNView
@@ -143,9 +150,15 @@ class GameViewController: UIViewController {
         
         // check what nodes are tapped
         let p = gestureRecognize.location(in: scnView)
+        
+        print(#line, #function, p)
+        
         let hitResults = scnView.hitTest(p, options: [:])
         // check that we clicked on at least one object
         if hitResults.count > 0 {
+            //Remove animation from the ship
+            ship.removeAllActions()
+            
             // retrieved the first clicked object
             let result = hitResults[0]
             
@@ -154,16 +167,13 @@ class GameViewController: UIViewController {
             
             // highlight it
             SCNTransaction.begin()
-            SCNTransaction.animationDuration = 0.5
+            SCNTransaction.animationDuration = 0.25
             
             // on completion - unhighlight
             SCNTransaction.completionBlock = {
-                SCNTransaction.begin()
-                SCNTransaction.animationDuration = 0.5
-                
                 material.emission.contents = UIColor.black
-                
-                SCNTransaction.commit()
+                self.addShip(to: scnView.scene!)
+                self.duration *= 0.9
             }
             
             material.emission.contents = UIColor.red
