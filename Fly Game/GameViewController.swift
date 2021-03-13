@@ -10,8 +10,41 @@
 import SceneKit
 
 class GameViewController: UIViewController {
-    
+
+    //MARK: - Outlets
     let buttun = UIButton()
+    
+    //MARK: - Methods
+    
+    func addShip(to scene:SCNScene )  {
+        // retrieve the ship node
+        let ship = scene.rootNode.childNode(withName: "ship", recursively: true)!
+        
+        //Correct ship rotatoin
+        ship.rotation = SCNVector4(0, 0, 0, 1)
+        
+        //Unhide the ship
+        ship.isHidden = false
+        
+        // position the ship
+        let x = Int.random(in: -25 ... 25)
+        let y = Int.random(in: -25 ... 25)
+        let z = -100
+        ship.position = SCNVector3(x, y, z)
+        
+        //set ship orientation
+        ship.look(at: SCNVector3(2 * x,2 * x,2 * z))
+        
+        // animate the 3d object
+        
+        ship.runAction(.move(to: SCNVector3(), duration: 5)) {
+            ship.isHidden = true
+            DispatchQueue.main.async {
+                self.buttun.isHidden = false
+            }
+            print(#line, #function, "GAME OVER")
+        }
+    }
     
     /// Configure user interface
     func configureUI() {
@@ -29,11 +62,26 @@ class GameViewController: UIViewController {
         buttun.setTitleColor(.yellow, for: .normal)
         buttun.titleLabel?.font = UIFont.boldSystemFont(ofSize: 32)
         
-        //Side button
+        //Hide button
         buttun.isHidden = true
+        
+        buttun.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+        
+        //Add button to the view
         view.addSubview(buttun)
     }
 
+    @objc func buttonTapped() {
+        print(#line, #function)
+        buttun.isHidden = true
+        
+        // retrieve the SCNView
+        let scnView = self.view as! SCNView
+        
+        //Add ship to the scene view
+        addShip(to: scnView.scene!)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -62,26 +110,9 @@ class GameViewController: UIViewController {
         ambientLightNode.light!.color = UIColor.darkGray
         scene.rootNode.addChildNode(ambientLightNode)
         
-        // retrieve the ship node
-        let ship = scene.rootNode.childNode(withName: "ship", recursively: true)!
+        //Add ship to the scene
+        addShip(to: scene)
         
-        // position the ship
-        let x = 25
-        let y = 25
-        let z = -100
-        ship.position = SCNVector3(x, y, z)
-        
-        //set ship orientation
-        ship.look(at: SCNVector3(2 * x,2 * x,2 * z))
-        // animate the 3d object
-//        ship.runAction(SCNAction.repeatForever(SCNAction.rotateBy(x: 0, y: 2, z: 0, duration: 1)))
-        ship.runAction(.move(to: SCNVector3(), duration: 5)) {
-            ship.removeFromParentNode()
-            DispatchQueue.main.async {
-                self.buttun.isHidden = false
-            }
-            print(#line, #function, "GAME OVER")
-        }
         // retrieve the SCNView
         let scnView = self.view as! SCNView
         
@@ -141,6 +172,7 @@ class GameViewController: UIViewController {
         }
     }
     
+    //MARK: - Computed Properties
     override var shouldAutorotate: Bool {
         return true
     }
