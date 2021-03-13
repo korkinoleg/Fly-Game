@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7C318B3425FD487900AF663C /* SCR1.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C318B3125FD487900AF663C /* SCR1.png */; };
+		7C318B3525FD487900AF663C /* SCR2.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C318B3225FD487900AF663C /* SCR2.png */; };
+		7C318B3625FD487A00AF663C /* SCR3.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C318B3325FD487900AF663C /* SCR3.png */; };
 		7CF229BD25FA489F001051A2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF229BC25FA489F001051A2 /* AppDelegate.swift */; };
 		7CF229BF25FA489F001051A2 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 7CF229BE25FA489F001051A2 /* art.scnassets */; };
 		7CF229C125FA489F001051A2 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF229C025FA489F001051A2 /* GameViewController.swift */; };
@@ -15,6 +18,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7C318B3125FD487900AF663C /* SCR1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SCR1.png; path = ../../../../SCR1.png; sourceTree = "<group>"; };
+		7C318B3225FD487900AF663C /* SCR2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SCR2.png; path = ../../../../SCR2.png; sourceTree = "<group>"; };
+		7C318B3325FD487900AF663C /* SCR3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SCR3.png; path = ../../../../SCR3.png; sourceTree = "<group>"; };
 		7CF229B925FA489F001051A2 /* Fly Game.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Fly Game.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CF229BC25FA489F001051A2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7CF229BE25FA489F001051A2 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -35,6 +41,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7C318B3025FD483100AF663C /* Screenshots */ = {
+			isa = PBXGroup;
+			children = (
+				7C318B3125FD487900AF663C /* SCR1.png */,
+				7C318B3225FD487900AF663C /* SCR2.png */,
+				7C318B3325FD487900AF663C /* SCR3.png */,
+			);
+			path = Screenshots;
+			sourceTree = "<group>";
+		};
 		7CF229B025FA489F001051A2 = {
 			isa = PBXGroup;
 			children = (
@@ -54,6 +70,7 @@
 		7CF229BB25FA489F001051A2 /* Fly Game */ = {
 			isa = PBXGroup;
 			children = (
+				7C318B3025FD483100AF663C /* Screenshots */,
 				7CF229BC25FA489F001051A2 /* AppDelegate.swift */,
 				7CF229BE25FA489F001051A2 /* art.scnassets */,
 				7CF229C025FA489F001051A2 /* GameViewController.swift */,
@@ -121,7 +138,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7C318B3625FD487A00AF663C /* SCR3.png in Resources */,
+				7C318B3425FD487900AF663C /* SCR1.png in Resources */,
 				7CF229BF25FA489F001051A2 /* art.scnassets in Resources */,
+				7C318B3525FD487900AF663C /* SCR2.png in Resources */,
 				7CF229C625FA48A2001051A2 /* Assets.xcassets in Resources */,
 				7CF229C425FA48A0001051A2 /* Main.storyboard in Resources */,
 			);
